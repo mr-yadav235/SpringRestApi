@@ -2,11 +2,11 @@ package com.books.restapi.controllers;
 
 import com.books.restapi.models.Book;
 import com.books.restapi.repositories.BookRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class BookController {
@@ -24,5 +24,10 @@ public class BookController {
         bookRepository.save(book);
 
         return book.getId();
+    }
+
+    @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
+    public Book getBookById(@PathVariable("id") String id){
+        return bookRepository.findOneById(id);
     }
 }
