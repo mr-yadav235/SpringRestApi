@@ -30,4 +30,12 @@ public class BookController {
     public Book getBookById(@PathVariable("id") String id){
         return bookRepository.findOneById(id);
     }
+
+    @RequestMapping(method=RequestMethod.DELETE, value="/books/{id}")
+    public String delete(@PathVariable String id) {
+        Book book = bookRepository.findOneById(id);
+        bookRepository.delete(book);
+
+        return "product deleted";
+    }
 }
